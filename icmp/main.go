@@ -87,6 +87,7 @@ func caculateCheckSum(icmpByte []byte) uint16 {
 	)
 	for i := 0; i < length; i += 2 {
 		// 网络字节序 to 主机字节序
+		// tcp/ip 都是大端字节序
 		sum := uint32(icmpByte[i])<<8 + uint32(icmpByte[i+1])
 		checksum += sum
 	}
