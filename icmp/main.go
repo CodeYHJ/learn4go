@@ -86,6 +86,7 @@ func caculateCheckSum(icmpByte []byte) uint16 {
 		length = len(icmpByte) - 1
 	)
 	for i := 0; i < length; i += 2 {
+		// 网络字节序 to 主机字节序
 		sum := uint32(icmpByte[i])<<8 + uint32(icmpByte[i+1])
 		checksum += sum
 	}
@@ -94,8 +95,11 @@ func caculateCheckSum(icmpByte []byte) uint16 {
 		checksum += uint32(icmpByte[length])
 	}
 
-	checksum = (checksum >> 16) + (checksum & 0xffff)
-	checksum += checksum >> 16
+	// 高位与低位相加，直到高位为0
+	for checksum>>16 != 0 {
+		checksum = (checksum >> 16) + (checksum & 0xffff)
+
+	}
 
 	return uint16(^checksum)
 }
