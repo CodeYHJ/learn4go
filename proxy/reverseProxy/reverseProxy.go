@@ -7,7 +7,7 @@ import (
 	"net/url"
 )
 
-// ReverseProxy implement
+// OriginReverseProxy ReverseProxy implement
 func OriginReverseProxy(domain string) func(http.ResponseWriter, *http.Request) {
 	urlParse, err := url.Parse(domain)
 	if err != nil {

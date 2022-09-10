@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"net"
+	"net/http/httputil"
 	"time"
 )
 
@@ -103,4 +104,9 @@ func caculateCheckSum(icmpByte []byte) uint16 {
 	}
 
 	return uint16(^checksum)
+}
+
+func a() {
+	anbc := &httputil.ReverseProxy{}
+	anbc.ServeHTTP()
 }
